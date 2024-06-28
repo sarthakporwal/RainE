@@ -118,10 +118,10 @@ class _HomeScreenState extends State<HomeScreen> {
 												crossAxisAlignment: CrossAxisAlignment.start,
 												children: [
 													Text(
-														'📍 ${state.weather.areaName}',
+														'📍 Kota',
 														style: const TextStyle(
 															color: Colors.white,
-															fontWeight: FontWeight.w300
+															fontWeight: FontWeight.w600
 														),
 													),
 													const SizedBox(height: 8),
