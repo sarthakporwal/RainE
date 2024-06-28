@@ -13,29 +13,32 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var futureBuilder = FutureBuilder(
+				future: _determinePosition(),
+        builder: newMethod
+      );
     return MaterialApp(
 			debugShowCheckedModeBanner: false,
-      home: FutureBuilder(
-				future: _determinePosition(),
-        builder: (context, snap) {
-					if(snap.hasData) {
-						return BlocProvider<WeatherBlocBloc>(
-							create: (context) => WeatherBlocBloc()..add(
-								FetchWeather(snap.data as Position)
-							),
-							child: const HomeScreen(),
-						);
-					} else {
-						return const Scaffold(
-							body: Center(
-								child: CircularProgressIndicator(),
-							),
-						);
-					}
-        }
-      )
+      home: futureBuilder
     );
   }
+
+  Widget newMethod(context, snap) {
+  					if(snap.hasData) {
+  						return BlocProvider<WeatherBlocBloc>(
+  							create: (context) => WeatherBlocBloc()..add(
+  								FetchWeather(snap.data as Position)
+  							),
+  							child: const HomeScreen(),
+  						);
+  					} else {
+  						return const Scaffold(
+  							body: Center(
+  								child: CircularProgressIndicator(),
+  							),
+  						);
+  					}
+      }
 }
 
 /// Determine the current position of the device.
